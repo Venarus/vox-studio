@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vox-studio"
+version = "1.0.0"
+description = "Professional Desktop Audio Recording Studio & 11-Stage AI Speech Restoration Engine"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Vena", email = "143168102+Venarus@users.noreply.github.com" }
+]
+keywords = [
+    "audio-processing",
+    "speech-restoration",
+    "speech-enhancement",
+    "dsp",
+    "onnxruntime",
+    "pyside6",
+    "sounddevice",
+    "gtcrn",
+    "audio-recording"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Multimedia :: Sound/Audio :: Capture/Recording",
+    "Topic :: Multimedia :: Sound/Audio :: Analysis",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+dependencies = [
+    "PySide6>=6.5.0",
+    "sounddevice>=0.4.6",
+    "soundfile>=0.12.1",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "onnxruntime>=1.15.0",
+    "av>=10.0.0",
+    "psutil>=5.9.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.20.0"
+]
+
+[project.scripts]
+vox-studio = "main:main"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra -q"

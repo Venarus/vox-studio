@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18191D"/>
+      <stop offset="100%" stop-color="#0E0F12"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF4652"/>
+      <stop offset="100%" stop-color="#C02633"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  <!-- Arka Plan Yuvarlatılmış Kare -->
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#bgGrad)" stroke="#28292E" stroke-width="8" filter="url(#shadow)"/>
+  
+  <!-- Kırmızı Vurgu İçi (Stylized V & Waveform) -->
+  <path d="M128 152 L256 384 L384 152" fill="none" stroke="url(#redGrad)" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Merkezdeki Ses Dalgası Çizgisi -->
+  <circle cx="256" cy="240" r="22" fill="#FFFFFF"/>
+  <line x1="200" y1="210" x2="200" y2="270" stroke="#FF4652" stroke-width="14" stroke-linecap="round"/>
+  <line x1="312" y1="210" x2="312" y2="270" stroke="#FF4652" stroke-width="14" stroke-linecap="round"/>
+</svg>

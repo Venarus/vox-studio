@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF4652"/>
+      <stop offset="100%" stop-color="#C02633"/>
+    </linearGradient>
+  </defs>
+  <!-- Sol İkon (180x180) -->
+  <rect x="20" y="30" width="180" height="180" rx="42" fill="#151619" stroke="#28292E" stroke-width="4"/>
+  <path d="M60 75 L110 165 L160 75" fill="none" stroke="url(#redGrad)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="110" cy="110" r="9" fill="#FFFFFF"/>
+  
+  <!-- Sağ Yazı -->
+  <text x="230" y="130" font-family="Segoe UI, Inter, sans-serif" font-weight="900" font-size="76" fill="#F5F5F6" letter-spacing="1">VOX</text>
+  <text x="400" y="130" font-family="Segoe UI, Inter, sans-serif" font-weight="300" font-size="76" fill="#E53945" letter-spacing="2">Studio</text>
+  <text x="234" y="175" font-family="Segoe UI, Inter, sans-serif" font-weight="500" font-size="20" fill="#A1A1AA" letter-spacing="4">VIDEO · DUBBING · AI STEMS</text>
+</svg>

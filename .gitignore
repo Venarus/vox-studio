@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions & dynamic libs
+*.so
+*.pyd
+
+# Environments & Virtualenv
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# PyInstaller / Build output
+build/
+dist/
+*.spec
+
+# Application & Benchmark Output
+benchmarks_output/
+*.part.*
+temp_rec.wav
+test_export.*
+.vox_studio/
+logs/
+
+# IDE & Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Operating System Files
+Thumbs.db
+Desktop.ini
+.DS_Store

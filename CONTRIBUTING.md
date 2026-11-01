@@ -47,9 +47,12 @@ We welcome contributions to **VOX Studio — Audio Engine**! Whether reporting b
 ## 🧪 Testing Requirements
 
 Before submitting a Pull Request:
-- Ensure all 88+ unit tests pass: `pytest`
-- Run the E2E verification benchmark to confirm real-time factor (RTF < 0.1) and zero clipping.
-- Keep commit messages descriptive using Conventional Commits (`feat:`, `fix:`, `docs:`, `perf:`).
+- Ensure all 96+ unit tests pass: `pytest`
+- Run the batch processor verification and E2E benchmark to confirm real-time factor (RTF < 0.1) and zero clipping:
+  ```bash
+  python tools/e2e_audio_engine_benchmark.py
+  ```
+- Keep commit messages descriptive using Conventional Commits (`feat:`, `fix:`, `refactor:`, `docs:`, `perf:`, `test:`, `chore:`).
 
 ---
 

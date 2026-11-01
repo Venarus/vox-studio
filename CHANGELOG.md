@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2026-11-01
+
+### Added
+- **Industry-Standard Restoration Profiles:**
+  - `Audiobook Profile`: Calibrated for strict ACX / Audible publishing standards (-20 LUFS integrated target, -3.0 dBFS true peak ceiling, high-sensitivity mouth de-clicker, gentle 2.2:1 opto compression).
+  - `Broadcast Profile`: Calibrated for EBU R128 / ATSC A/85 standards (-23 LUFS integrated target, -1.0 dBFS true peak limiter, 50 Hz/60 Hz mains harmonic notch).
+  - `Voiceover & Trailer Profile`: Commercial narration profile with +2.2 dB high-frequency air shelf (12 kHz) and +3.0 dB presence boost (3.8 kHz) for punchy vocal projection.
+  - Profile registry (`PROFILES`, `get_profile()`, `list_profiles()`) with automatic fallback to balanced mode.
+- **Batch Audio Processor Engine (`dsp/batch.py`):**
+  - High-performance multi-file directory scanner and batch audio restoration workstation.
+  - Multi-file progress tracking, file-level error isolation (corrupt files do not break the batch run), and comprehensive summary statistics (total audio duration, speedup RTF, LUFS deltas).
+  - Dedicated CLI tool interface: `python -m dsp.batch --input <path> --output <path> --profile <profile> --format <format>`.
+  - Seamless CLI flag integration in application entrypoint: `python main.py --batch <folder>`.
+- **Broadcast Metadata Tagging:**
+  - Added studio metadata tagging support across `export_wav`, `export_flac`, and `export_mp3_pyav` (encoder stamp, title, artist, comments).
+- **Expanded Test Suite (96/96 Passing):**
+  - Added 8 comprehensive unit tests in `tests/test_batch_processor.py` validating all ACX/EBU specifications, file discovery, batch execution, error resilience, and cancellation.
+  - Added graceful fallback handling and pytest skip guards across Python 3.10 through Python 3.15.
+- **Visual Branding & Documentation Suite:**
+  - High-resolution SVG banners, badges, and architectural diagrams in `docs/assets/`.
+  - 5 real application GUI screenshots in `docs/screenshots/` captured via offscreen Qt pipeline.
+  - Dedicated `docs/ARCHITECTURE.md`, `docs/USER_GUIDE.md`, and `SECURITY.md`.
+
+### Fixed
+- Fixed potential unbound variable error (`info`, `autoplay`) in `MainWindow._open_in_restoration_lab`.
+- Improved cross-version Python 3.14/3.15 compatibility for optional native libraries.
+
+---
+
 ## [1.0.0] - 2026-10-30
 
 ### Initial Release — Audio Engine V1 & Ultimate AI Speech Restoration Engine

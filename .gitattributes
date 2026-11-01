@@ -1,0 +1,32 @@
+# Auto-detect text files and normalize line endings to LF in repository
+* text=auto eol=lf
+
+# Explicit Text Formats
+*.py text eol=lf diff=python
+*.toml text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.txt text eol=lf
+*.svg text eol=lf
+*.cs text eol=crlf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary Files (Never perform CRLF conversion or diff corruption)
+*.onnx binary
+*.wav binary
+*.mp3 binary
+*.flac binary
+*.ogg binary
+*.aiff binary
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.pyc binary

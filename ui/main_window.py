@@ -1159,17 +1159,7 @@ class MainWindow(QMainWindow):
         self.processing.load_file(p)
         self._show_view("processing")
         self._set_status(f"Kayıt AI Restorasyon Laboratuvarına aktarıldı: {p.name}")
-        self._set_status(f"Açıldı: {Path(info.path).name}")
-        self._start_peaks(info.path)
-        self._start_analysis(info.path)
         self._sync_controls()
-
-        if autoplay:
-            try:
-                self.ctx.player.play(0.0)
-                self._ui_timer.start()
-            except Exception as exc:
-                QMessageBox.critical(self, "Oynatılamadı", str(exc))
 
     def _open_and_analyze(self, path: str) -> None:
         self.open_file(path)

@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c10" />
+      <stop offset="50%" stop-color="#12161f" />
+      <stop offset="100%" stop-color="#1a0f14" />
+    </linearGradient>
+
+    <!-- Crimson Neon Accent -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF1744" />
+      <stop offset="50%" stop-color="#D50000" />
+      <stop offset="100%" stop-color="#FF5252" />
+    </linearGradient>
+
+    <!-- Wave Glow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Subtle Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.04" />
+    </pattern>
+  </defs>
+
+  <!-- Background Layer -->
+  <rect width="1280" height="420" fill="url(#bgGrad)" />
+  <rect width="1280" height="420" fill="url(#grid)" />
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="200" cy="180" r="220" fill="#D50000" opacity="0.12" filter="url(#neonGlow)" />
+  <circle cx="1080" cy="220" r="260" fill="#005CED" opacity="0.08" filter="url(#neonGlow)" />
+
+  <!-- Glowing Waveform Graphic (Background) -->
+  <g opacity="0.35">
+    <path d="M 0 310 Q 160 220 320 290 T 640 260 T 960 300 T 1280 270 L 1280 420 L 0 420 Z" fill="#D50000" opacity="0.15" />
+    <path d="M 0 310 Q 160 220 320 290 T 640 260 T 960 300 T 1280 270" fill="none" stroke="url(#accentGrad)" stroke-width="3" filter="url(#neonGlow)" />
+    <path d="M 0 330 Q 140 370 280 320 T 560 340 T 840 290 T 1120 350 T 1280 320" fill="none" stroke="#FF5252" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.6" />
+  </g>
+
+  <!-- High-Tech Audio Metering Bars (Right Side) -->
+  <g transform="translate(940, 100)" opacity="0.85">
+    <!-- Bar 1 -->
+    <rect x="0" y="80" width="8" height="120" rx="4" fill="#1e2530" />
+    <rect x="0" y="120" width="8" height="80" rx="4" fill="#00E676" />
+    <!-- Bar 2 -->
+    <rect x="18" y="40" width="8" height="160" rx="4" fill="#1e2530" />
+    <rect x="18" y="90" width="8" height="110" rx="4" fill="#00E676" />
+    <!-- Bar 3 -->
+    <rect x="36" y="20" width="8" height="180" rx="4" fill="#1e2530" />
+    <rect x="36" y="70" width="8" height="130" rx="4" fill="#FFEB3B" />
+    <!-- Bar 4 -->
+    <rect x="54" y="0" width="8" height="200" rx="4" fill="#1e2530" />
+    <rect x="54" y="25" width="8" height="175" rx="4" fill="#FF1744" />
+    <!-- Bar 5 -->
+    <rect x="72" y="30" width="8" height="170" rx="4" fill="#1e2530" />
+    <rect x="72" y="80" width="8" height="120" rx="4" fill="#FFEB3B" />
+    <!-- Bar 6 -->
+    <rect x="90" y="60" width="8" height="140" rx="4" fill="#1e2530" />
+    <rect x="90" y="110" width="8" height="90" rx="4" fill="#00E676" />
+    <!-- Bar 7 -->
+    <rect x="108" y="90" width="8" height="110" rx="4" fill="#1e2530" />
+    <rect x="108" y="140" width="8" height="60" rx="4" fill="#00E676" />
+  </g>
+
+  <!-- Left Content: Studio Icon & Typography -->
+  <g transform="translate(80, 85)">
+    <!-- Sleek Studio Microphone Icon Badge -->
+    <rect x="0" y="0" width="76" height="76" rx="20" fill="#181c24" stroke="#2c3340" stroke-width="2" />
+    <!-- Glowing Badge Ring -->
+    <circle cx="38" cy="38" r="28" fill="none" stroke="url(#accentGrad)" stroke-width="2" filter="url(#neonGlow)" />
+    
+    <!-- Microphone Silhouette -->
+    <g transform="translate(25, 20)">
+      <rect x="8" y="2" width="10" height="18" rx="5" fill="#ffffff" />
+      <path d="M 4 12 A 9 9 0 0 0 22 12" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+      <line x1="13" y1="21" x2="13" y2="28" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+      <line x1="8" y1="28" x2="18" y2="28" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+    </g>
+
+    <!-- Version & Status Tag -->
+    <g transform="translate(95, 12)">
+      <rect x="0" y="0" width="190" height="26" rx="13" fill="#D50000" fill-opacity="0.2" stroke="#FF1744" stroke-width="1" />
+      <circle cx="14" cy="13" r="4" fill="#00E676" />
+      <text x="26" y="17" fill="#FF5252" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1">STUDIO AUDIO ENGINE V1</text>
+    </g>
+
+    <!-- Main Title -->
+    <text x="95" y="68" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="900" letter-spacing="1.5">VOX STUDIO</text>
+
+    <!-- Subtitle / Hook -->
+    <text x="0" y="125" fill="#E0E6ED" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="0.3">
+      Professional Voice Recording &amp; 11-Stage AI Speech Restoration Workstation
+    </text>
+
+    <!-- Feature Description Line -->
+    <text x="0" y="160" fill="#8F9CAE" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="400">
+      48 kHz / 24-bit WASAPI Master • GTCRN Neural Recurrent Denoising • Linkwitz-Riley 7.6 kHz Crossover • ITU-R BS.1770-4 LUFS
+    </text>
+
+    <!-- Badges Row -->
+    <g transform="translate(0, 195)">
+      <!-- Badge 1: 48 kHz / 24-bit -->
+      <rect x="0" y="0" width="145" height="30" rx="6" fill="#141922" stroke="#252d3d" stroke-width="1" />
+      <text x="12" y="19" fill="#00E5FF" font-family="monospace" font-size="12" font-weight="700">🎙️ 48kHz / 24-bit</text>
+
+      <!-- Badge 2: GTCRN ONNX -->
+      <rect x="155" y="0" width="140" height="30" rx="6" fill="#141922" stroke="#252d3d" stroke-width="1" />
+      <text x="167" y="19" fill="#00E676" font-family="monospace" font-size="12" font-weight="700">⚡ RTF 0.086 (11.7x)</text>
+
+      <!-- Badge 3: ITU-R BS.1770-4 -->
+      <rect x="305" y="0" width="135" height="30" rx="6" fill="#141922" stroke="#252d3d" stroke-width="1" />
+      <text x="317" y="19" fill="#FFD600" font-family="monospace" font-size="12" font-weight="700">🎚️ -16 LUFS True</text>
+
+      <!-- Badge 4: A/B Loudness Match -->
+      <rect x="450" y="0" width="165" height="30" rx="6" fill="#141922" stroke="#252d3d" stroke-width="1" />
+      <text x="462" y="19" fill="#FF5252" font-family="monospace" font-size="12" font-weight="700">🔄 Synchronized A/B</text>
+
+      <!-- Badge 5: Batch Processing -->
+      <rect x="625" y="0" width="165" height="30" rx="6" fill="#141922" stroke="#252d3d" stroke-width="1" />
+      <text x="637" y="19" fill="#B388FF" font-family="monospace" font-size="12" font-weight="700">📦 Batch Processor</text>
+    </g>
+  </g>
+</svg>

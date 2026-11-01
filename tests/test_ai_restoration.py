@@ -25,9 +25,20 @@ import numpy as np
 import pytest
 import soundfile as sf
 
-from ai.restoration_engine import AIRestorationEngine, GTCRNDenoiser, get_ai_engine
+from ai.restoration_engine import (
+    HAS_ONNX,
+    AIRestorationEngine,
+    GTCRNDenoiser,
+    get_ai_engine,
+)
 from audio.ab_player import ABChannel, ABPlayer
-from audio.exporter import export_flac, export_mp3_pyav, export_wav, validate_exported_file
+from audio.exporter import (
+    HAS_PYAV,
+    export_flac,
+    export_mp3_pyav,
+    export_wav,
+    validate_exported_file,
+)
 from dsp.analysis import analyze_array
 from dsp.chain import (
     DSPProcessor,
@@ -54,11 +65,13 @@ from dsp.restoration import (
 # ==============================================================================
 # 1. AI SPEECH RESTORATION ENGINE TESTLERİ
 # ==============================================================================
+@pytest.mark.skipif(not HAS_ONNX, reason="onnxruntime kütüphanesi kurulu değil.")
 def test_ai_engine_availability():
     engine = get_ai_engine()
     assert engine.is_available() is True, "GTCRN ONNX modeli ve onnxruntime hazır olmalı."
 
 
+@pytest.mark.skipif(not HAS_ONNX, reason="onnxruntime kütüphanesi kurulu değil.")
 def test_gtcrn_denoiser_16k_mono():
     engine = get_ai_engine()
     denoiser = engine.get_gtcrn()
@@ -79,6 +92,7 @@ def test_gtcrn_denoiser_16k_mono():
     assert np.max(np.abs(cleaned)) < 1.0
 
 
+@pytest.mark.skipif(not HAS_ONNX, reason="onnxruntime kütüphanesi kurulu değil.")
 def test_ai_engine_restore_speech_48k():
     engine = get_ai_engine()
     fs = 48000
@@ -198,6 +212,7 @@ def test_adaptive_restoration_profile():
     assert cfg.declip.enabled is True
 
 
+@pytest.mark.skipif(not HAS_ONNX, reason="onnxruntime kütüphanesi kurulu değil.")
 def test_dsp_processor_full_pipeline():
     fs = 48000
     t = np.linspace(0, 0.5, int(fs * 0.5), endpoint=False)
@@ -241,6 +256,7 @@ def test_ab_player_toggle_and_matching():
 # ==============================================================================
 # 5. DIŞA AKTARMA VE METADATA DOĞRULAMA TESTLERİ
 # ==============================================================================
+@pytest.mark.skipif(not HAS_PYAV, reason="PyAV (av) kütüphanesi kurulu değil.")
 def test_export_wav_and_mp3(tmp_path: Path):
     fs = 48000
     t = np.linspace(0, 0.5, int(fs * 0.5), endpoint=False)

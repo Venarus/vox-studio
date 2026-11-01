@@ -10,7 +10,7 @@ from . import paths as _paths
 
 APP_NAME = "VOX Studio"
 APP_SUBTITLE = "Audio Engine V1 — AI Speech Restoration Workstation"
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.1.0"
 APP_AUTHOR = "VOX Audio Engineering"
 
 # Geriye dönük uyumluluk için başlangıç anındaki yol anlık görüntüsü.

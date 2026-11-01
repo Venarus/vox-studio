@@ -287,6 +287,158 @@ def create_maximum_restoration_profile() -> ProcessingChainConfig:
     return cfg
 
 
+def create_audiobook_profile() -> ProcessingChainConfig:
+    """
+    Audiobook Profili (ACX / Audible Standartı):
+    Sesli kitap anlatımları için endüstri standardı ACX teslim kriterlerini sağlar:
+    - Entegre Loudness: -20.0 LUFS (-23 LUFS ile -18 LUFS arası hedefe tam oturur)
+    - True Peak Tavanı: -3.0 dBFS (ACX kuralı: peak kesinlikle -3 dBFS'yi aşamaz)
+    - Tükürük ve ağız şapırtılarını temizleyen hassas de-clicker
+    - Şeffaf opto-stil kompresör (2.2:1) ve sibilans yumuşatma
+    """
+    cfg = ProcessingChainConfig()
+    cfg.declip.enabled = True
+    cfg.declip.threshold = 0.98
+    cfg.hum_filter.enabled = False
+    cfg.declick.enabled = True
+    cfg.declick.sensitivity = 0.65
+    cfg.plosive.enabled = True
+    cfg.plosive.cutoff_hz = 100.0
+    cfg.ai_denoise.enabled = True
+    cfg.ai_denoise.strength = 0.65
+    cfg.ai_denoise.blend = 0.95
+    cfg.denoise.enabled = False
+    cfg.dereverb.enabled = True
+    cfg.dereverb.amount = 0.35
+    cfg.dereverb.rt60 = 0.25
+    cfg.clarity.enabled = True
+    cfg.clarity.presence_gain_db = 1.2
+    cfg.clarity.boxiness_cut_db = -1.5
+    cfg.clarity.air_shelf_db = 0.8
+    cfg.deesser.enabled = True
+    cfg.deesser.threshold_dbfs = -18.0
+    cfg.deesser.max_reduction_db = 5.0
+    cfg.compressor.enabled = True
+    cfg.compressor.threshold_dbfs = -20.0
+    cfg.compressor.ratio = 2.2
+    cfg.compressor.attack_ms = 25.0
+    cfg.compressor.release_ms = 140.0
+    cfg.compressor.makeup_gain_db = 1.5
+    cfg.normalize_lufs_target = -20.0
+    cfg.limiter.enabled = True
+    cfg.limiter.ceiling_dbfs = -3.0
+    return cfg
+
+
+def create_broadcast_profile() -> ProcessingChainConfig:
+    """
+    Broadcast Profili (EBU R128 / ATSC A/85):
+    Televizyon, radyo ve profesyonel yayın kuruluşları için standart ses zinciri:
+    - Entegre Loudness: -23.0 LUFS
+    - True Peak Tavanı: -1.0 dBFS
+    - 50/60 Hz şebeke koruması ve güçlü konuşma varlığı
+    """
+    cfg = ProcessingChainConfig()
+    cfg.declip.enabled = True
+    cfg.hum_filter.enabled = True
+    cfg.hum_filter.base_freq_hz = 50.0
+    cfg.hum_filter.harmonics = 3
+    cfg.declick.enabled = True
+    cfg.declick.sensitivity = 0.50
+    cfg.ai_denoise.enabled = True
+    cfg.ai_denoise.strength = 0.85
+    cfg.ai_denoise.blend = 1.0
+    cfg.denoise.enabled = False
+    cfg.dereverb.enabled = True
+    cfg.dereverb.amount = 0.40
+    cfg.dereverb.rt60 = 0.30
+    cfg.clarity.enabled = True
+    cfg.clarity.presence_gain_db = 2.8
+    cfg.clarity.boxiness_cut_db = -2.5
+    cfg.clarity.air_shelf_db = 1.5
+    cfg.deesser.enabled = True
+    cfg.deesser.threshold_dbfs = -15.0
+    cfg.deesser.max_reduction_db = 6.0
+    cfg.compressor.enabled = True
+    cfg.compressor.threshold_dbfs = -16.0
+    cfg.compressor.ratio = 3.5
+    cfg.compressor.attack_ms = 10.0
+    cfg.compressor.release_ms = 90.0
+    cfg.compressor.makeup_gain_db = 2.5
+    cfg.normalize_lufs_target = -23.0
+    cfg.limiter.enabled = True
+    cfg.limiter.ceiling_dbfs = -1.0
+    return cfg
+
+
+def create_voiceover_profile() -> ProcessingChainConfig:
+    """
+    Voiceover & Trailer Profili (Ticari Seslendirme):
+    Reklam, YouTube anlatımı ve sinematik fragmanlar için parlak, dolgun ve vurucu ses karakteri:
+    - Entegre Loudness: -16.0 LUFS
+    - True Peak Tavanı: -1.0 dBFS
+    - 12 kHz hava rafı (+2.2 dB) ve 3.8 kHz varlık takviyesi
+    - Hızlı ataklı dinamik kompresör
+    """
+    cfg = ProcessingChainConfig()
+    cfg.declip.enabled = True
+    cfg.hum_filter.enabled = True
+    cfg.hum_filter.base_freq_hz = 50.0
+    cfg.hum_filter.harmonics = 2
+    cfg.declick.enabled = True
+    cfg.declick.sensitivity = 0.60
+    cfg.plosive.enabled = True
+    cfg.ai_denoise.enabled = True
+    cfg.ai_denoise.strength = 0.75
+    cfg.ai_denoise.blend = 1.0
+    cfg.denoise.enabled = False
+    cfg.dereverb.enabled = True
+    cfg.dereverb.amount = 0.35
+    cfg.dereverb.rt60 = 0.25
+    cfg.clarity.enabled = True
+    cfg.clarity.presence_gain_db = 3.0
+    cfg.clarity.presence_freq_hz = 3800.0
+    cfg.clarity.boxiness_cut_db = -2.0
+    cfg.clarity.air_shelf_db = 2.2
+    cfg.deesser.enabled = True
+    cfg.deesser.threshold_dbfs = -16.0
+    cfg.deesser.max_reduction_db = 7.0
+    cfg.compressor.enabled = True
+    cfg.compressor.threshold_dbfs = -15.0
+    cfg.compressor.ratio = 3.2
+    cfg.compressor.attack_ms = 12.0
+    cfg.compressor.release_ms = 110.0
+    cfg.compressor.makeup_gain_db = 2.5
+    cfg.normalize_lufs_target = -16.0
+    cfg.limiter.enabled = True
+    cfg.limiter.ceiling_dbfs = -1.0
+    return cfg
+
+
+PROFILES: Dict[str, Callable[[], ProcessingChainConfig]] = {
+    "natural": create_natural_profile,
+    "balanced": create_balanced_profile,
+    "maximum": create_maximum_restoration_profile,
+    "audiobook": create_audiobook_profile,
+    "broadcast": create_broadcast_profile,
+    "voiceover": create_voiceover_profile,
+}
+
+
+def get_profile(name: str) -> ProcessingChainConfig:
+    """İsme göre profil nesnesi döndürür. Bilinmeyen isimlerde 'balanced' döner."""
+    factory = PROFILES.get(name.lower().strip())
+    if factory is not None:
+        return factory()
+    logger.warning("Bilinmeyen profil adı '%s'; 'balanced' profiline geçiliyor.", name)
+    return create_balanced_profile()
+
+
+def list_profiles() -> List[str]:
+    """Kayıtlı profil adlarının listesini döndürür."""
+    return list(PROFILES.keys())
+
+
 def create_adaptive_profile(analysis: Any) -> ProcessingChainConfig:
     """
     Adaptive Restoration ("Maksimum Kaliteyle Temizle"):

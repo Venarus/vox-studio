@@ -127,6 +127,29 @@ def _parse_args(argv: Optional[List[str]]) -> argparse.Namespace:
         default=None,
         help="Açılışta belirtilen ses dosyasını aç",
     )
+    parser.add_argument(
+        "--batch",
+        metavar="GİRDİ",
+        default=None,
+        help="Toplu ses restorasyonu için girdi klasörü veya dosya yolu",
+    )
+    parser.add_argument(
+        "--batch-output",
+        metavar="ÇIKTI",
+        default=None,
+        help="Toplu ses restorasyonu çıktı klasörü",
+    )
+    parser.add_argument(
+        "--profile",
+        default="balanced",
+        help="Toplu restorasyon profili (audiobook, broadcast, voiceover, balanced, natural, maximum)",
+    )
+    parser.add_argument(
+        "--batch-format",
+        default="wav",
+        choices=["wav", "mp3", "flac"],
+        help="Toplu restorasyon çıktı ses formatı",
+    )
     return parser.parse_args(argv)
 
 
@@ -135,6 +158,24 @@ def run(argv: Optional[List[str]] = None) -> int:
     if args.version:
         print(f"{C.APP_NAME} {C.APP_VERSION} — {C.APP_SUBTITLE}")
         return 0
+
+    if args.batch:
+        from dsp.batch import BatchAudioProcessor
+        inp = Path(args.batch)
+        outp = (
+            Path(args.batch_output)
+            if args.batch_output
+            else (inp.parent / f"{inp.stem}_restored" if inp.is_file() else inp.parent / f"{inp.name}_restored")
+        )
+        files = [inp] if inp.is_file() else BatchAudioProcessor.discover_audio_files(inp)
+        if not files:
+            print(f"Hata: '{inp}' konumunda ses dosyası bulunamadı.", file=sys.stderr)
+            return 1
+        processor = BatchAudioProcessor(profile_name=args.profile)
+        print(f"VOX Studio Toplu İşlem: {len(files)} dosya | Profil: {args.profile} -> {outp}")
+        res = processor.process_batch(files, outp, format_ext=args.batch_format)
+        print("Tamamlandı:", res.summary_text())
+        return 0 if res.failed == 0 else 2
 
     QApplication.setHighDpiScaleFactorRoundingPolicy(
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough

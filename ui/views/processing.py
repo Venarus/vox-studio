@@ -67,9 +67,12 @@ from dsp.chain import (
     ProcessingChainConfig,
     compute_detailed_metrics,
     create_adaptive_profile,
+    create_audiobook_profile,
     create_balanced_profile,
+    create_broadcast_profile,
     create_maximum_restoration_profile,
     create_natural_profile,
+    create_voiceover_profile,
 )
 from ui import icons
 from ui.context import AppContext
@@ -491,6 +494,24 @@ class ProcessingView(QWidget):
         self.profile_group.addButton(self.radio_max)
         lay.addWidget(self.radio_max)
 
+        self.radio_audiobook = QRadioButton("Audiobook — ACX / Audible Standardı")
+        self.radio_audiobook.setToolTip("Sesli kitap için katı ACX kriterleri (-20 LUFS, -3 dBFS ceiling, de-click)")
+        self.radio_audiobook.toggled.connect(lambda c: c and self._apply_preset_profile("audiobook"))
+        self.profile_group.addButton(self.radio_audiobook)
+        lay.addWidget(self.radio_audiobook)
+
+        self.radio_broadcast = QRadioButton("Broadcast — EBU R128 / TV & Radyo")
+        self.radio_broadcast.setToolTip("Yayıncılık standardı (-23 LUFS, 50 Hz çentik filtresi, konuşma netliği)")
+        self.radio_broadcast.toggled.connect(lambda c: c and self._apply_preset_profile("broadcast"))
+        self.profile_group.addButton(self.radio_broadcast)
+        lay.addWidget(self.radio_broadcast)
+
+        self.radio_voiceover = QRadioButton("Voiceover — Parlak Ticari Seslendirme")
+        self.radio_voiceover.setToolTip("YouTube ve reklam seslendirmesi için parlak hava ve vurucu dinamikler")
+        self.radio_voiceover.toggled.connect(lambda c: c and self._apply_preset_profile("voiceover"))
+        self.profile_group.addButton(self.radio_voiceover)
+        lay.addWidget(self.radio_voiceover)
+
         # Temizleme Gücü Slider
         strength_box = QVBoxLayout()
         strength_box.setSpacing(4)
@@ -782,6 +803,12 @@ class ProcessingView(QWidget):
             self.config = create_natural_profile()
         elif name == "maximum":
             self.config = create_maximum_restoration_profile()
+        elif name == "audiobook":
+            self.config = create_audiobook_profile()
+        elif name == "broadcast":
+            self.config = create_broadcast_profile()
+        elif name == "voiceover":
+            self.config = create_voiceover_profile()
         else:
             self.config = create_balanced_profile()
 

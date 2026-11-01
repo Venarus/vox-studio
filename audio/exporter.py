@@ -34,6 +34,7 @@ def export_wav(
     fs: int,
     output_path: str | Path,
     bit_depth: int = 24,
+    metadata: Optional[Dict[str, str]] = None,
 ) -> Path:
     """
     Ses verisini standart uncompressed RIFF WAV olarak kaydeder.
@@ -59,6 +60,7 @@ def export_flac(
     fs: int,
     output_path: str | Path,
     bit_depth: int = 24,
+    metadata: Optional[Dict[str, str]] = None,
 ) -> Path:
     """
     Ses verisini kayıpsız sıkıştırılmış FLAC olarak kaydeder.
@@ -77,6 +79,7 @@ def export_mp3_pyav(
     fs: int,
     output_path: str | Path,
     bitrate_kbps: int = 320,
+    metadata: Optional[Dict[str, str]] = None,
     progress_cb: Optional[Callable[[float], None]] = None,
 ) -> Path:
     """
@@ -98,6 +101,12 @@ def export_mp3_pyav(
     n_samples = data.shape[0]
 
     container = av.open(str(out_path), mode="w", format="mp3")
+    container.metadata["encoder"] = "VOX Studio Audio Engine V1"
+    if metadata:
+        for k, v in metadata.items():
+            if v:
+                container.metadata[str(k).lower()] = str(v)
+
     stream = container.add_stream("mp3", rate=int(fs), layout=layout)
     stream.bit_rate = bit_rate
 
